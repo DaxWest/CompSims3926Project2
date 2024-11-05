@@ -9,6 +9,8 @@ g = 9.81 #m/s2
 rho_air = 1.2 #kg/m3
 C_d = 0.35 #drag coefficient
 h_initial = 1 #m
+rads = (np.pi)/180
+angle = 45 * rads
 
 #Part 1
 
@@ -45,3 +47,5 @@ def solution_methods(v_initial, angle, t, method, air_res=0, gravity=g, mass=mas
         position = np.append(r)
 
     return position
+
+#Part 2
