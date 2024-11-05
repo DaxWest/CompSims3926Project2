@@ -1,4 +1,7 @@
 #testing for commit
+import numpy as np
+import matplotlib.pyplot as plt
+import scipy as sc
 
 mass_ball = 0.145 #kg
 d_ball = 7.4 #cm
@@ -9,7 +12,7 @@ h_initial = 1 #m
 
 #Part 1
 
-def solution_methods(v, angle, t, method, air_res):
+def solution_methods(v, angle, t, method, air_res=0):
     if method == 'Euler':
         pass
     elif method == 'Euler-Cromer':
