@@ -18,14 +18,16 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
 
     theta = angle
     tau = t_step
+
+    r = np.array([0, h_initial])
+    v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)])  # v has x and y components determined by trig
+
     vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
     rc = np.sqrt((v[0]**2) + (v[1])**2)
     A = (np.pi)*((d/2)**2) #area
     acc = np.array([0, gravity])
 
     a = -(acc) - (vec * (air_res * rho * A * rc)/(2*mass))
-    v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)]) #v has x and y components determined by trig
-    r = np.array([0, h_initial])
 
     position = [r]
     while r[1] > 0:
