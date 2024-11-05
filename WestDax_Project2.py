@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import scipy as sc
 
 mass_ball = 0.145 #kg
-d_ball = 7.4 #cm
+d_ball = 7.4 * (10**(-2)) #was given in cm, converted to m
 g = 9.81 #m/s2
 rho_air = 1.2 #kg/m3
 C_d = 0.35 #drag coefficient
@@ -14,10 +14,10 @@ angle = 45 * rads
 
 #Part 1
 
-def solution_methods(v_initial, angle, t, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, h=h_initial):
+def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, h=h_initial):
 
     theta = angle
-    tau = t
+    tau = t_step
     vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
     rc = np.sqrt((v[0]**2) + (v[1])**2)
     A = (np.pi)*((d/2)**2) #area
@@ -47,5 +47,10 @@ def solution_methods(v_initial, angle, t, method, air_res=0, gravity=g, mass=mas
         position = np.append(r)
 
     return position
+v0 = 100 / 2.237 # 100 mph was given, have to convert mph to m/s
+t_step = 0.1
+val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=C_d)
+
+fig = plt.figure()
 
 #Part 2
