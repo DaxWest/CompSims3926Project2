@@ -8,9 +8,8 @@ d_ball = 7.4 * (10**(-2)) #was given in cm, converted to m
 g = 9.81 #m/s2
 rho_air = 1.2 #kg/m3
 C_d = 0.35 #drag coefficient
-h_initial = 1 #m
+h_initial = 0 #m
 rads = (np.pi)/180
-angle = 45 * rads
 
 #Part 1
 
@@ -49,7 +48,10 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
         position = np.append(position, r)
 
     return position
-v0 = 100 / 2.237 # 100 mph was given, have to convert mph to m/s
+
+
+angle = 45 * rads
+v0 = 15 #m/s
 t_step = 0.1
 
 val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=0)
