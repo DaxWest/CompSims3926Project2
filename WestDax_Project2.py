@@ -46,12 +46,13 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
             r_step = r + (tau * ((v_step + v)/2))
             v, r = v_step, r_step
 
-        position = np.append(v, r)
+        position = np.append(position, r)
 
     return position
 v0 = 100 / 2.237 # 100 mph was given, have to convert mph to m/s
 t_step = 0.1
 val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=C_d)
+print(val_euler)
 
 fig = plt.figure()
 
