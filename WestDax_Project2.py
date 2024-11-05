@@ -53,9 +53,8 @@ v0 = 100 / 2.237 # 100 mph was given, have to convert mph to m/s
 t_step = 0.1
 
 val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=0)
-print(val_euler)
-print("------------------------------")
-print(val_euler[0::2])
+x_val_euler = val_euler[0::2]
+y_val_euler = val_euler[1::2]
 
 fig = plt.figure()
 
