@@ -12,10 +12,18 @@ h_initial = 1 #m
 
 #Part 1
 
-def solution_methods(v, angle, t, method, air_res=0):
+def solution_methods(v, angle, t, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, drag=C_d, h=h_initial):
     if method == 'Euler':
-        pass
+        v_step = v + (tau * a)
+        r_step = r + (tau * v)
+        v, r = v_step, r_step
+
     elif method == 'Euler-Cromer':
-        pass
+        v_step = v + (tau * a)
+        r_step = r + (tau * v_step)
+        v, r = v_step, r_step
+
     elif method == 'Midpoint':
-        pass
+        v_step = v + (tau * a)
+        r_step = r + (tau * ((v_step + v)/2))
+        v, r = v_step, r_step
