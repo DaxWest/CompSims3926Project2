@@ -18,24 +18,26 @@ def solution_methods(v_initial, angle, t, method, air_res=0, gravity=g, mass=mas
     tau = t
     vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
     rc = np.sqrt((v[0]**2) + (v[1])**2)
-    A = (np.pi)*((d/2)**2)
+    A = (np.pi)*((d/2)**2) #area
     acc = np.array([0, gravity])
 
     a = -(acc) - (vec * (air_res * rho * A * rc)/(2*mass))
     v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)]) #v has x and y components determined by trig
     r = np.array([0, h_initial])
 
-    if method == 'Euler':
-        v_step = v + (tau * a)
-        r_step = r + (tau * v)
-        v, r = v_step, r_step
+    position = [r]
+    while r[1] > 0:
+        if method == 'Euler':
+            v_step = v + (tau * a)
+            r_step = r + (tau * v)
+            v, r = v_step, r_step
 
-    elif method == 'Euler-Cromer':
-        v_step = v + (tau * a)
-        r_step = r + (tau * v_step)
-        v, r = v_step, r_step
+        elif method == 'Euler-Cromer':
+            v_step = v + (tau * a)
+            r_step = r + (tau * v_step)
+            v, r = v_step, r_step
 
-    elif method == 'Midpoint':
-        v_step = v + (tau * a)
-        r_step = r + (tau * ((v_step + v)/2))
-        v, r = v_step, r_step
+        elif method == 'Midpoint':
+            v_step = v + (tau * a)
+            r_step = r + (tau * ((v_step + v)/2))
+            v, r = v_step, r_step
