@@ -56,6 +56,14 @@ val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=0)
 x_val_euler = val_euler[0::2]
 y_val_euler = val_euler[1::2]
 
+val_euler_cromer = solution_methods(v0, angle, t_step, 'Euler-Cromer', air_res=0)
+x_val_euler_cromer = val_euler_cromer[0::2]
+y_val_euler_cromer = val_euler_cromer[1::2]
+
+val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=0)
+x_val_midpoint = val_midpoint[0::2]
+y_val_midpoint = val_midpoint[1::2]
+
 fig = plt.figure()
 
 #Part 2
