@@ -64,6 +64,11 @@ val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=0)
 x_val_midpoint = val_midpoint[0::2]
 y_val_midpoint = val_midpoint[1::2]
 
-fig = plt.figure()
+fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(9,7))
+ax[0,0].scatter(x_val_euler, y_val_euler)
+ax[0,1].scatter(x_val_euler_cromer, y_val_euler_cromer)
+ax[0,2].scatter(x_val_midpoint, y_val_midpoint)
+
+plt.savefig("Method_Comparison")
 
 #Part 2
