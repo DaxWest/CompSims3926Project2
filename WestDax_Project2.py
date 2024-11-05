@@ -46,7 +46,7 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
             r_step = r + (tau * ((v_step + v)/2))
             v, r = v_step, r_step
 
-        position = np.append(r)
+        position = np.append(v, r)
 
     return position
 v0 = 100 / 2.237 # 100 mph was given, have to convert mph to m/s
