@@ -12,7 +12,13 @@ h_initial = 1 #m
 
 #Part 1
 
-def solution_methods(v, angle, t, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, drag=C_d, h=h_initial):
+def solution_methods(v, angle, t, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, h=h_initial):
+
+    vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
+    rc = np.sqrt((v[0]**2) + (v[1])**2)
+    A = (np.pi)*((d/2)**2)
+    a = -(gravity) - (vec * (air_res * rho * A * rc)/(2*mass))
+
     if method == 'Euler':
         v_step = v + (tau * a)
         r_step = r + (tau * v)
