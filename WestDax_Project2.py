@@ -8,7 +8,7 @@ d_ball = 7.4 * (10**(-2)) #was given in cm, converted to m
 g = 9.81 #m/s2
 rho_air = 1.2 #kg/m3
 C_d = 0.35 #drag coefficient
-h_initial = 0 #m
+h_initial = 1 #m
 rads = (np.pi)/180
 
 #Part 1
@@ -18,7 +18,7 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
     theta = angle
     tau = t_step
 
-    r = np.array([0, h_initial])
+    r = np.array([0, h])
     v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)])  # v has x and y components determined by trig
 
     vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
@@ -51,18 +51,18 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
 
 
 angle = 45 * rads
-v0 = 15 #m/s
+v0 = 50 #m/s
 t_step = 0.1
 
-val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=0)
+val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=C_d)
 x_val_euler = val_euler[0::2]
 y_val_euler = val_euler[1::2]
 
-val_euler_cromer = solution_methods(v0, angle, t_step, 'Euler-Cromer', air_res=0)
+val_euler_cromer = solution_methods(v0, angle, t_step, 'Euler-Cromer', air_res=C_d)
 x_val_euler_cromer = val_euler_cromer[0::2]
 y_val_euler_cromer = val_euler_cromer[1::2]
 
-val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=0)
+val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=C_d)
 x_val_midpoint = val_midpoint[0::2]
 y_val_midpoint = val_midpoint[1::2]
 
