@@ -41,3 +41,7 @@ def solution_methods(v_initial, angle, t, method, air_res=0, gravity=g, mass=mas
             v_step = v + (tau * a)
             r_step = r + (tau * ((v_step + v)/2))
             v, r = v_step, r_step
+
+        position = np.append(r)
+
+    return position
