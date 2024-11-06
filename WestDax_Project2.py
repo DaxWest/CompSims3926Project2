@@ -98,8 +98,13 @@ std_speed = 15/2.237 #converting mph to m/s
 mean_angle = 45*rads
 std_angle = 10*rads
 
-norm_dist_speed = (std_speed * np.random.randn()) + mean_speed
-norm_dist_angle = (std_angle * np.random.randn()) + mean_angle
+#choosing to start with 100 bats
+AB = 100
+HR = 0
 
-print(norm_dist_speed)
-RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
+for i in range(AB):
+    norm_dist_speed = (std_speed * np.random.randn()) + mean_speed
+    norm_dist_angle = (std_angle * np.random.randn()) + mean_angle
+    RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
+    if (RDH_sim[0::2][-2] * 3.281) >= 400:
+        HR += 1
