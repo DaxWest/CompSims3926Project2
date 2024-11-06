@@ -119,20 +119,18 @@ for i in range(AB):
     norm_dist_speed = (std_speed * np.random.randn()) + mean_speed
     norm_dist_angle = (std_angle * np.random.randn()) + mean_angle
 
-    for h in h_fence:
+    for j in h_fence:
         height_at_fence = 0
         RDH_sim_fence = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
         range_sol = RDH_sim_fence[0::2]
         height_sol = RDH_sim_fence[1::2]
 
-        index = []
-        if (range_sol * 3.281) >= 400:
-            index.append(range_sol)
+        index = np.array(np.where((range_sol * 3.281) >= 400))
 
         if len(index) > 0:
             height_at_fence = range_sol
 
         homerun_index = []
-        if height_at_fence > h:
-            homerun_index.append(h_fence, h)
+        if height_at_fence > h_fence[j]:
+            homerun_index.append(h_fence, h_fence[j])
             HR_w_fence += 1
