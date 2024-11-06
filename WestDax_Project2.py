@@ -45,6 +45,10 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
             r_step = r + (tau * ((v_step + v)/2))
             v, r = v_step, r_step
 
+        elif method == 'Theory':
+            v_step = v + (tau * (-acc))
+            r_step = r + (tau * v)
+            v, r = v_step, r_step
         position = np.append(position, r)
 
     return position
@@ -54,22 +58,28 @@ angle = 45 * rads
 v0 = 50 #m/s
 t_step = 0.1
 
-val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=0)
+val_euler = solution_methods(v0, angle, t_step, 'Euler', air_res=C_d)
 x_val_euler = val_euler[0::2]
 y_val_euler = val_euler[1::2]
 
-val_euler_cromer = solution_methods(v0, angle, t_step, 'Euler-Cromer', air_res=0)
+val_euler_cromer = solution_methods(v0, angle, t_step, 'Euler-Cromer', air_res=C_d)
 x_val_euler_cromer = val_euler_cromer[0::2]
 y_val_euler_cromer = val_euler_cromer[1::2]
 
-val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=0)
+val_midpoint = solution_methods(v0, angle, t_step, 'Midpoint', air_res=C_d)
 x_val_midpoint = val_midpoint[0::2]
 y_val_midpoint = val_midpoint[1::2]
+
+val_theory = solution_methods(v0, angle, t_step, 'Theory', air_res=C_d)
+x_val_theory = val_theory[0::2]
+y_val_theory = val_theory[1::2]
 
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(15,5))
 ax[0].scatter(x_val_euler, y_val_euler)
 ax[1].scatter(x_val_euler_cromer, y_val_euler_cromer)
 ax[2].scatter(x_val_midpoint, y_val_midpoint)
+for i in range(3):
+    ax[i].plot(x_val_theory, y_val_theory, 'k')
 
 plt.savefig("Method_Comparison")
 
