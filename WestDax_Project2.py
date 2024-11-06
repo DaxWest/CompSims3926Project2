@@ -99,7 +99,7 @@ mean_angle = 45*rads
 std_angle = 10*rads
 
 #chose to start with 100 bats
-AB = 100
+AB = 1000
 HR = 0
 
 for i in range(AB):
@@ -133,6 +133,15 @@ for i in range(AB):
             if height_at_fence >= float(val):
                 index_height = np.searchsorted(h_fence, val)
                 HR_w_fence[index_height] = HR_w_fence[index_height] + 1
-
+ratio_w_fence = AB/HR_w_fence
 print("------------------------------- Part 3 -------------------------------")
-print(f'The RDH At-Bat to Homerun ratio with a fence:{AB/HR_w_fence}')
+abhr_leq_ten = []
+abhr_gr_ten = []
+
+for i in range(len(ratio_w_fence)):
+    if ratio_w_fence[i] <= 10:
+        abhr_leq_ten.append((ratio_w_fence[i], h_fence[i]))
+    else:
+        abhr_gr_ten.append((ratio_w_fence[i], h_fence[i]))
+
+print(f'The RDH At-Bat to Homerun ratio with a fence:{ratio_w_fence}')
