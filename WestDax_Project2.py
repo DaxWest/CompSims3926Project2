@@ -29,7 +29,7 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
     a = -(acc) - (vec * (air_res * rho * A * rc)/(2*mass))
 
     position = [r]
-    while r[1] > 0:
+    while r[1] >= 0:
         if method == 'Euler':
             v_step = v + (tau * a)
             r_step = r + (tau * v)
@@ -102,3 +102,4 @@ std_angle = 10*rads
 
 norm_dist_speed = (std_speed * np.random.randn(N)) + mean_speed
 norm_dist_angle = (std_angle * np.random.randn(N)) + mean_angle
+
