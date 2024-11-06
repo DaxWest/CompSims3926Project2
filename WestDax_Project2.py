@@ -99,7 +99,7 @@ mean_angle = 45*rads
 std_angle = 10*rads
 
 #chose to start with 100 bats
-AB = 1000
+AB = 100
 HR = 0
 
 for i in range(AB):
@@ -108,7 +108,7 @@ for i in range(AB):
     RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
     if (RDH_sim[0::2][-2] * 3.281) >= 400:
         HR += 1
-
+print("------------------------------- Part 2 -------------------------------")
 print(f'The RDH At-Bat to Homerun ratio: {AB / HR}')
 
 #Part 3
@@ -126,12 +126,13 @@ for i in range(AB):
         range_sol = RDH_sim_fence[0::2]
         height_sol = RDH_sim_fence[1::2]
 
-        index = np.array(np.where(((range_sol * 3.281) >= 400))[0])
+        index = np.array(np.where(range_sol * 3.281 >= 400)[0])
         if len(index) != 0:
-            height_at_fence = height_sol[index]
+            height_at_fence = height_sol[index[0]]
 
             if height_at_fence >= float(val):
                 index_height = np.searchsorted(h_fence, val)
                 HR_w_fence[index_height] = HR_w_fence[index_height] + 1
 
+print("------------------------------- Part 3 -------------------------------")
 print(f'The RDH At-Bat to Homerun ratio with a fence:{AB/HR_w_fence}')
