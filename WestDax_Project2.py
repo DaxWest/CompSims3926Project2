@@ -21,15 +21,15 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
     r = np.array([0, h])
     v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)])  # v has x and y components determined by trig
 
-    vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
-    rc = np.sqrt((v[0]**2) + (v[1])**2)
+    #vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
+
     A = (np.pi)*((d/2)**2) #area
     acc = np.array([0, gravity])
 
-    a = -(acc) - (vec * (air_res * rho * A * rc)/(2*mass))
-
     position = [r]
     while r[1] >= 0:
+        rc = np.sqrt((v[0] ** 2) + (v[1]) ** 2)
+        a = -(acc) - (abs(v) * (air_res * rho * A * rc) / (2 * mass))
         if method == 'Euler':
             v_step = v + (tau * a)
             r_step = r + (tau * v)
