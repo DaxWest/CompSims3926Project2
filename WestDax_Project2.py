@@ -144,4 +144,4 @@ for i in range(len(ratio_w_fence)):
     else:
         abhr_gr_ten.append((ratio_w_fence[i], h_fence[i]))
 
-print(f'The RDH At-Bat to Homerun ratio with a fence:{ratio_w_fence}')
+print(f'The minimum fence height (for the given conditions) to keep AB/HR > 10 is: {abhr_gr_ten[0][1]}m')
