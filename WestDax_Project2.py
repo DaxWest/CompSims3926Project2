@@ -93,3 +93,12 @@ for i in range(3):
 plt.savefig("Method_Comparison")
 
 #Part 2
+N=10
+mean_speed = 100/2.237 #converting mph to m/s
+std_speed = 15/2.237 #converting mph to m/s
+
+mean_angle = 45*rads
+std_angle = 10*rads
+
+norm_dist_speed = (std_speed * np.random.randn(N)) + mean_speed
+norm_dist_angle = (std_angle * np.random.randn(N)) + mean_angle
