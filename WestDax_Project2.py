@@ -21,8 +21,6 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
     r = np.array([0, h])
     v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)])  # v has x and y components determined by trig
 
-    #vec = abs(v) #this, combined with rc make up the vector and value of v in the acceleration formula, dvdt, given
-
     A = (np.pi)*((d/2)**2) #area
     acc = np.array([0, gravity])
 
@@ -94,15 +92,14 @@ for i in range(3):
 plt.savefig("Method_Comparison")
 
 #Part 2
-N=10
 mean_speed = 100/2.237 #converting mph to m/s
 std_speed = 15/2.237 #converting mph to m/s
 
 mean_angle = 45*rads
 std_angle = 10*rads
 
-norm_dist_speed = (std_speed * np.random.randn(N)) + mean_speed
-norm_dist_angle = (std_angle * np.random.randn(N)) + mean_angle
+norm_dist_speed = (std_speed * np.random.randn()) + mean_speed
+norm_dist_angle = (std_angle * np.random.randn()) + mean_angle
 
 print(norm_dist_speed)
-#RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
+RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
