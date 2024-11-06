@@ -75,11 +75,20 @@ x_val_theory = val_theory[0::2]
 y_val_theory = val_theory[1::2]
 
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(15,5))
-ax[0].scatter(x_val_euler, y_val_euler)
-ax[1].scatter(x_val_euler_cromer, y_val_euler_cromer)
-ax[2].scatter(x_val_midpoint, y_val_midpoint)
+ax[0].scatter(x_val_euler, y_val_euler, marker='+')
+ax[0].set_title('Euler')
+
+ax[1].scatter(x_val_euler_cromer, y_val_euler_cromer, marker='+')
+ax[1].set_title('Euler-Cromer')
+
+ax[2].scatter(x_val_midpoint, y_val_midpoint, marker='+')
+ax[2].set_title('Midpoint')
+
+fig.suptitle("Figure 2.3 Reproduction for Multiple Methods")
 for i in range(3):
     ax[i].plot(x_val_theory, y_val_theory, 'k')
+    ax[i].grid()
+    ax[i].legend(['Drag = 0.35', 'Drag = 0'])
 
 plt.savefig("Method_Comparison")
 
