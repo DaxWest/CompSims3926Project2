@@ -99,7 +99,7 @@ mean_angle = 45*rads
 std_angle = 10*rads
 
 #choosing to start with 100 bats
-AB = 100
+AB = 1000
 HR = 0
 
 for i in range(AB):
@@ -108,3 +108,5 @@ for i in range(AB):
     RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
     if (RDH_sim[0::2][-2] * 3.281) >= 400:
         HR += 1
+
+print(f'The RDH At-Bat to Homerun ratio: {AB / HR}')
