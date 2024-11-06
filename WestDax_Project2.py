@@ -98,7 +98,7 @@ std_speed = 15/2.237 #converting mph to m/s
 mean_angle = 45*rads
 std_angle = 10*rads
 
-#choosing to start with 100 bats
+#chose to start with 100 bats
 AB = 1000
 HR = 0
 
@@ -110,3 +110,29 @@ for i in range(AB):
         HR += 1
 
 print(f'The RDH At-Bat to Homerun ratio: {AB / HR}')
+
+#Part 3
+h_fence = np.arange(0.5, 15.1, 0.5) #increasing fence height in increments of 0.5
+HR_w_fence = np.zeros(len(h_fence))
+
+for i in range(AB):
+    norm_dist_speed = (std_speed * np.random.randn()) + mean_speed
+    norm_dist_angle = (std_angle * np.random.randn()) + mean_angle
+
+    for h in h_fence:
+        height_at_fence = 0
+        RDH_sim_fence = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
+        range_sol = RDH_sim_fence[0::2]
+        height_sol = RDH_sim_fence[1::2]
+
+        index = []
+        if (height_sol * 3.281) >= 400:
+            index.append(height_sol)
+
+        if len(index) > 0:
+            height_at_fence = range_sol
+
+        homerun_index = []
+        if height_at_fence > h:
+            homerun_index.append(h_fence, h)
+            HR_w_fence += 1
