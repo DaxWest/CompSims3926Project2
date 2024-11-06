@@ -49,6 +49,7 @@ def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mas
             v_step = v + (tau * (-acc))
             r_step = r + (tau * v)
             v, r = v_step, r_step
+
         position = np.append(position, r)
 
     return position
@@ -103,3 +104,5 @@ std_angle = 10*rads
 norm_dist_speed = (std_speed * np.random.randn(N)) + mean_speed
 norm_dist_angle = (std_angle * np.random.randn(N)) + mean_angle
 
+print(norm_dist_speed)
+#RDH_sim = solution_methods(norm_dist_speed, norm_dist_angle, t_step, 'Euler', air_res=C_d)
