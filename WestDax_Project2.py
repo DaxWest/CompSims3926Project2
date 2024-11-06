@@ -126,8 +126,8 @@ for i in range(AB):
         height_sol = RDH_sim_fence[1::2]
 
         index = []
-        if (height_sol * 3.281) >= 400:
-            index.append(height_sol)
+        if (range_sol * 3.281) >= 400:
+            index.append(range_sol)
 
         if len(index) > 0:
             height_at_fence = range_sol
