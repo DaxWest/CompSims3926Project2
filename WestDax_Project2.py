@@ -12,43 +12,57 @@ h_initial = 1 #m
 rads = (np.pi)/180
 
 #Part 1
-
 def solution_methods(v_initial, angle, t_step, method, air_res=0, gravity=g, mass=mass_ball, d=d_ball, rho=rho_air, h=h_initial):
+    '''
 
+    :param v_initial: initial speed at which the ball is moving (in m/s)
+    :param angle: initial angle from the horizontal (in radians)
+    :param t_step: interval between when the position is "checked" (in s)
+    :param method: accepts 'Euler', 'Euler-Cromer', 'Midpoint' or, 'Theory'. Is case-sensitive
+    :param air_res: drag coefficient, 0 by default
+    :param gravity: local value of acceleration due to gravity (in m/s^2)
+    :param mass: mass of the object in motion (in kg)
+    :param d: diameter of the object, assumed to be spherical/circular (in m)
+    :param rho: mass density of the object (kg/m^3)
+    :param h: initial height from which the object begins moving (in m)
+    :return: returns the position (x,y) of the object
+
+    '''
     theta = angle
     tau = t_step
 
-    r = np.array([0, h])
+    r = np.array([0, h]) #initial x and y position of the ball
     v = np.array([v_initial * np.cos(theta), v_initial * np.sin(theta)])  # v has x and y components determined by trig
 
     A = (np.pi)*((d/2)**2) #area
     acc = np.array([0, gravity])
 
-    position = [r]
+    position = [r] #initializing position "vector"
     while r[1] >= 0:
-        rc = np.sqrt((v[0] ** 2) + (v[1]) ** 2)
-        a = -(acc) - (abs(v) * (air_res * rho * A * rc) / (2 * mass))
-        if method == 'Euler':
+        rc = np.sqrt((v[0] ** 2) + (v[1]) ** 2) #vector components of motion
+        a = -(acc) - (abs(v) * (air_res * rho * A * rc) / (2 * mass)) #acceleration of the ball
+
+        if method == 'Euler': #Euler method of time-step solutions for position and velocity of an object with or without air resistance
             v_step = v + (tau * a)
             r_step = r + (tau * v)
             v, r = v_step, r_step
 
-        elif method == 'Euler-Cromer':
+        elif method == 'Euler-Cromer': #Euler-Cromer method of time-step solutions for position and velocity of an object with or without air resistance
             v_step = v + (tau * a)
             r_step = r + (tau * v_step)
             v, r = v_step, r_step
 
-        elif method == 'Midpoint':
+        elif method == 'Midpoint': #Midpoint method of time-step solutions for position and velocity of an object with or without air resistance
             v_step = v + (tau * a)
             r_step = r + (tau * ((v_step + v)/2))
             v, r = v_step, r_step
 
-        elif method == 'Theory':
+        elif method == 'Theory': #A theoretical method of time-step solutions for position and velocity of an object without air resistance, based on the Euler method
             v_step = v + (tau * (-acc))
             r_step = r + (tau * v)
             v, r = v_step, r_step
 
-        position = np.append(position, r)
+        position = np.append(position, r) #need to append both the original and new position so the correct information in carried into the next instance of the while loop
 
     return position
 
@@ -112,7 +126,6 @@ print("------------------------------- Part 2 -------------------------------")
 print(f'The RDH At-Bat to Homerun ratio: {AB / HR}')
 
 #Part 3
-#h_fence = np.arange(0.5, 15.1, 0.5) #increasing fence height in increments of 0.5
 h_fence = np.linspace(0.5, 15, 30)
 HR_w_fence = np.zeros(30)
 
