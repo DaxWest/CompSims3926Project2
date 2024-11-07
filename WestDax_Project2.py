@@ -1,7 +1,6 @@
 #testing for commit
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy as sc
 
 mass_ball = 0.145 #kg
 d_ball = 7.4 * (10**(-2)) #was given in cm, converted to m
@@ -90,12 +89,18 @@ y_val_theory = val_theory[1::2]
 fig, ax = plt.subplots(nrows=1, ncols=3, figsize=(15,5))
 ax[0].scatter(x_val_euler, y_val_euler, marker='+')
 ax[0].set_title('Euler')
+ax[0].set_xlabel('Range (m)')
+ax[0].set_ylabel('Height (m)')
 
 ax[1].scatter(x_val_euler_cromer, y_val_euler_cromer, marker='+')
 ax[1].set_title('Euler-Cromer')
+ax[1].set_xlabel('Range (m)')
+ax[1].set_ylabel('Height (m)')
 
 ax[2].scatter(x_val_midpoint, y_val_midpoint, marker='+')
 ax[2].set_title('Midpoint')
+ax[2].set_xlabel('Range (m)')
+ax[2].set_ylabel('Height (m)')
 
 fig.suptitle("Figure 2.3 Reproduction for Multiple Methods")
 for i in range(3):
